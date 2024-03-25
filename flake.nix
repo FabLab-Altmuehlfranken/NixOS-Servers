@@ -7,7 +7,7 @@
     utils = { url = "github:numtide/flake-utils"; };
   };
 
-  outputs = { self, nixpkgs, attic }: {
+  outputs = { self, nixpkgs, attic, deploy-rs, sops-nix, utils }: {
     nixosConfigurations = {
       attic = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -51,17 +51,17 @@
 
 
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
-    } // utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            deploy-rs.defaultPackage.${system}
-            nixpkgs-fmt
-          ];
-        };
-      }
-  };
+  } // utils.lib.eachDefaultSystem (system:
+    let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
+      devShells.default = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          deploy-rs.defaultPackage.${system}
+          nixpkgs-fmt
+        ];
+      };
+    }
+  );
 }
