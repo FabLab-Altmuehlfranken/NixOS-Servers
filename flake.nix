@@ -36,8 +36,8 @@
 
     deploy.nodes = {
       "attic" = {
-        sshOpts = [ "-p" "222" "-o" "StrictHostKeyChecking=no" ];
-        hostname = "10.0.230.106";
+        hostname = "seeadler.fablab-altmuehlfranken.de";
+        sshOpts = [ "-p" "22106" "-o" "StrictHostKeyChecking=no" ];
         fastConnection = true;
 
         profiles.system = {
