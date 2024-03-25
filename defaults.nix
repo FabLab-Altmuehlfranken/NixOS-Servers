@@ -1,7 +1,7 @@
 { pkgs, config, lib, ... }:
 let
   utils = import ./util/include.nix { lib = lib; };
-  imports = (utils.includeDir ./defaults)
+  imports = (utils.includeDir ./defaults);
 in
 {
   inherit imports;
