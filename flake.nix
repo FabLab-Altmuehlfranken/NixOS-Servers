@@ -13,13 +13,6 @@
         system = "x86_64-linux";
         modules = [
           ({ pkgs, ... }: {
-            nix = {
-              package = pkgs.nixFlakes;
-              extraOptions = ''
-                experimental-features = nix-command flakes
-              '';
-              registry.nixpkgs.flake = nixpkgs;
-            };
             environment.systemPackages = [
               attic.packages.x86_64-linux.attic-client
             ];
